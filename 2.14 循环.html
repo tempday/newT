@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>循环</title>
+	<meta name="generator" content="EverEdit" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+<!--
+	var n=0;
+	while(n<10){
+		n++;
+		document.write(n+"<br/>");
+		//document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+Math.random().toFixed(1)+"<br />");
+		document.write("&nbsp;&nbsp;&nbsp;&nbsp;"+parseInt(Math.random()*10)+"<br />");
+	}
+	var ipt="";
+	while(ipt!="0"){
+		ipt=0;//prompt();
+		switch(ipt){
+			case "0":document.write(ipt+":正确"+"<br/>");break;
+			case "1":document.write(ipt+":第一步"+"<br/>");break;
+			case "2":document.write(ipt+":第二次"+"<br/>");break;
+			case "3":document.write(ipt+":事不过三"+"<br/>");break;
+			default:document.write(ipt+":什么鬼"+"<br/>");
+		}
+	}
+	var ran=parseInt(Math.random()*10);
+	var tx="";
+	document.write(ran+"<br />");
+	while(ipt!=ran){
+		ipt=parseInt(prompt(tx+"  请输入0-9的整数"));
+		document.write(
+			tx=ipt>ran?"大":
+			ipt<ran?"小":
+			ipt==ran?"答案正确":"继续"
+		);
+		document.write("<br />");
+		
+	}
+//-->
+</script>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    

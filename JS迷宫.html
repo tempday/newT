@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+	<!-- (c) &copy; js1k.com, 2010 - 2017 Note: submissions belong to their respectful owner, do not copy without their consent -->
+	<head>
+		<title>JS1k 2012 - Demo 1258 - "Maze Crawler"</title>
+		<meta charset="utf-8">
+		<meta name="author" content="Todd Pastel">
+		<meta name="description" content="JS1k 2012 demo: &quot;Maze Crawler&quot; -- Controls">
+		<meta name="pubdate" content="20120313">
+		<link rel="icon" type="image/png" href="http://js1k.com/favicon.png">
+		<link rel="canonical" href="http://js1k.com/2012-love/demo/1258">
+		<link rel="alternate" type="application/rss+xml" title="New demo feed" href="http://js1k.com/feed.xml">
+		<link rel="shortlink" href="http://js1k.com/1258">
+		<script>
+			setTimeout(function(){
+			        var ga = document.createElement('script');
+			        ga.async = true;
+			        ga.defer = true;
+			        ga.src = 'http://www.google-analytics.com/ga.js';
+			        ga.onload = function(){try{_gat._getTracker('UA-19882353-1')._trackPageview();}catch(e){window.console&&console.log("ga fail :'( ");};};
+			        var s = document.getElementsByTagName('script')[0];
+			        s.parentNode.insertBefore(ga, s);
+			      }, 10);
+		</script>
+		<style>
+			/* http://qfox.nl/notes/333 */
+			      body,html,iframe{margin:0;padding:0;border:0;width:100%;height:100%}
+			      iframe{position:absolute;top:0;left:0;padding-top:50px;box-sizing:border-box}
+			      header{position:relative;z-index:1;height:47px;padding-top:2px;border-bottom:1px solid #000;box-shadow:0 -10px 25px #ccc inset;background-color:#eee}
+			      aside,div,h1,p{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;font-size:16px;font-weight:inherit;line-height:22px;padding:0;margin:0;cursor:default}
+			      aside,h1{display:inline}
+			      a{color:#000;text-decoration:none;border-bottom:1px dashed #000}
+			      a:hover{border-bottom:1px solid red}
+			      a[href="0"]{text-decoration:line-through;pointer-events:none;border-bottom:0;color:#ccc}
+			      .button{float:left;width:40px;height:40px;line-height:40px;text-align:center;padding:0;margin:2px 0 0 10px;border:1px solid #888;border-color:#ddd #888 #888 #ddd;font-family:sans-serif;font-size:30px;font-weight:700;cursor:pointer}
+			      .button:hover{color:red;border-bottom-color:#888}
+			      .r{margin-right:10px}
+			      time{display:none}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div>
+				 <h1>
+
+          <a href="http://js1k.com">JS1k</a>
+
+          <a href="http://js1k.com/2012-love">2012</a>
+
+          <strong></strong> demo
+
+          &mdash;
+
+          "Maze Crawler" by Todd Pastel
+
+        </h1>
+				<p> <em>
+
+            Controls
+
+          </em>
+				</p>
+				<aside>&mdash; 1006 bytes &mdash;
+					<!-- --> <a href="http://js1k.com/2012-love/details/1258">demo details</a>
+&mdash; <a href="http://js1k.com/2012-love/demos">list of demos</a>
+					<!-- <b><a href="http://js1k.com/2012-love/demo/">
+
+            Update available here!
+
+          </a></b>
+
+          <!-- -->&mdash; <a href="http://js1k.com/1258" title="short link for your mobile devices" rel="nofollow">js1k.com/1258</a>
+				</aside>
+			</div> <a href="1257" class="button p">&Larr;</a>
+ <a href="1259" class="button n">&Rarr;</a>
+		</header>
+		<script type="demo">
+			function d(b,c,d,g){var h=f((d-b)/t),i=f((g-c)/t);if(h){var j=f(e()*h)*t+b;a.C(j+1,c-2,t-1,4)}if(i){var k=f(e()*i)*t+c;a.C(b-2,k+1,4,t-1)}}function m(b,c,g,h){var i=f((g-b)/t)-1,j=f((h-c)/t)-1;if(i&&j){var k=(f(e()*(i-1))+1)*t+b,l=(f(e()*(j-1))+1)*t+c,n=f(e()*4);a.F(k,c,1,o(c-h));a.F(b,l,o(b-g),1);if(n!=0)d(k,c,k,l);if(n!=1)d(k,l,g,l);if(n!=2)d(k,l,k,h);if(n!=3)d(b,l,k,l);m(b,c,k,l);m(k,c,g,l);m(b,l,k,h);m(k,l,g,h)}}c.width=c.height=201;with(c.style)width=height=innerHeight-25+"px";document.body.style.textAlign="center";var t=10,M=Math,e=M.random,f=M.floor,o=M.abs,X=Y=5,I=J=0;a.C=a.clearRect;a.F=a.fillRect;m(0,0,200,200);a.strokeRect(.5,.5,200,200);a.fillStyle="red";a.fillText("❤",191,200);a.fillStyle="blue";onkeydown=function(a){I=J=0;W=a.which;if(W==87)J=-1;if(W==83)J=1;if(W==65)I=-1;if(W==68)I=1};T=0;S=setInterval(function(){D=a.getImageData(X+I,Y+J,1,1).data;if(D[0]){alert("You found love in "+T/1e3+" seconds.");clearInterval(S)}if(!D[3]){a.C(X,Y,1,1);X+=I;Y+=J;a.F(X,Y,1,1)}T+=20},20);
+		</script>
+		<script>
+			(function() {
+	var doc = document;
+	var header = doc.getElementsByTagName("header")[0];
+	var firstChild = header.firstChild;
+	var p = doc.getElementsByClassName("p")[0];
+	var n = doc.getElementsByClassName("n")[0];
+	header.insertBefore(p, firstChild);
+	header.insertBefore(n, firstChild);
+	header.appendChild(doc.getElementsByTagName("p")[0])
+})();
+(function reload() {
+	var doc = document;
+	var header = doc.getElementsByTagName("header")[0];
+	var iframe = doc.createElement("iframe");
+	doc.body.appendChild(iframe);
+	var iwin = iframe.contentWindow;
+	var idoc = iframe.contentDocument;
+	idoc.open();
+	idoc.close();
+	idoc.write('<!doctype html><head><meta charset="utf-8"><body>');
+	idoc.head.innerHTML = "<style>\n" + "html, body { margin: 0; padding: 0; border: 0; width: 100%; height: 100%; }\n" + "</style>\n";
+	idoc.body.innerHTML = "\n\t\t" + "<canvas" + ' id="c"' + '' + "></canvas>\n" +
+		(true ? "<script>\x3c/script>\n" : "") + "";
+	var Audio = iwin.Audio;
+	iwin.Audio = function(x) {
+		return new Audio(x)
+	};
+	if (true) {
+		var canvas = idoc.getElementsByTagName("canvas")[0];
+		iwin.a = canvas.getContext("2d");
+		iwin.b = idoc.body;
+		iwin.c = canvas;
+		var p2d = iwin.Path2D;
+
+		function wrap(ctx) {
+			var fill = ctx.fill,
+				clip = ctx.clip,
+				stroke = ctx.stroke;
+			ctx.scale = ctx.scale;
+			ctx.drawFocusIfNeeded = ctx.drawFocusIfNeeded;
+			ctx.ellipse = ctx.ellipse;
+			ctx.fill = function(r) {
+				fill.call(ctx, r === "evenodd" ? "evenodd" : "nonzero")
+			};
+			ctx.stroke =
+				function(p) {
+					if (p && p2d && p instanceof p2d) stroke.call(ctx, p);
+					else stroke.call(ctx)
+				};
+			ctx.clip = function(p) {
+				if (p && p2d && p instanceof p2d) clip.call(ctx, p);
+				else clip.call(ctx)
+			};
+			return ctx
+		}
+		if (false) {
+			var cvs = iwin.c;
+			var cNode = cvs.cloneNode;
+			cvs.cloneNode = function() {
+				var clone = cNode.apply(cvs, arguments);
+				var cloneGet = clone.getContext;
+				clone.getContext = function() {
+					return wrap(cloneGet.call(clone, "2d"))
+				};
+				return clone
+			};
+			var get = cvs.getContext;
+			cvs.getContext = function() {
+				return wrap(get.call(cvs, "2d"))
+			}
+		}
+		if (true) wrap(iwin.a)
+	}
+	idoc.body.clientWidth;
+	var demo = idoc.createElement("script");
+	var scrpt = doc.querySelector('script[type="demo"]').textContent.replace(/m.location=m.location;/, "top.reload();");
+	if (false) scrpt = "A=0,B=0;" + scrpt;
+	demo.textContent = scrpt;
+	idoc.body.appendChild(demo);
+	idoc.close();
+	iframe.contentWindow.focus();
+	var r = doc.createElement("div");
+	r.innerHTML = "&#8635;";
+	r.className = "button r";
+	r.title = "restart just the demo (local, without remote fetch)";
+	window.reload = r.onclick = function() {
+		doc.body.removeChild(iframe);
+		r.parentElement.removeChild(r);
+		iframe = null;
+		r = null;
+		idoc = null;
+		header = null;
+		reload()
+	};
+	var firstLine = doc.getElementsByTagName("div")[0];
+	header.insertBefore(r, firstLine)
+})();
+		</script>
+	</body>
+
+</html>
