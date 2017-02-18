@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>2.15 数组</title>
+	<meta name="generator" content="EverEdit" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<script type="text/javascript">
+	<!--
+		var arr=[1,2,3,4,5];
+		document.write(arr+"<br />");
+		console.log(arr);
+		var emp=[],tips="请输入名字",ipt;
+		//对话框直接取消会返回 null 
+		//input 重点是赋值的同时当作判断的条件
+		/*
+		while((ipt=String(prompt(tips)))!="p"&&ipt!="null"){			
+			ipt!=""&&(emp[emp.length]=ipt);			
+			if (emp.length>50){
+				break;
+				}
+			document.write(emp+"<br />");
+		}*/
+		document.write("opp:");
+		for (var i=0;i<emp.length;i++){
+			document.write(emp[i]+",");
+		}
+		//arr.length  [length-1]  增加元素  获得最后一个  改小会删除末尾元素
+		document.write("<br />");
+		for (var i=0,a;i<10;i++){
+			a=parseInt(Math.random()*11);
+			emp[emp.length]=a;
+		}
+		document.write(emp+"<br />");
+		//牛角尖版 对比的是两个数组
+		var max;
+		/*
+		for (var i=0;i<emp.length;i++){
+			for (var j=i+1;j<emp.length;j++){
+				//max>(emp[i]>emp[j]?emp[i]:emp[j]);
+				max=max>emp[i]?max:emp[i];
+				max=max>emp[j]?max:emp[j];
+			}
+		}
+		document.write(max+"<br />");
+		*/
+		//半成品
+		//for (var i=0;i<emp.length;max=max>emp[i++]?max:emp[i-1]);
+		for (var i=0,max=emp[0];i<emp.length;max>emp[i++]||(max=emp[i-1]));
+		document.write(max+"<br />");
+		function indexof(arr,ename){
+			for (var i=0;i<arr.length;i++){
+				if (ename==arr[i]){
+					return i
+				}
+					 //return 只能单独使用,无法放进表达式里
+					 //continue 是跳过 ,return是退出循环 同时还可以返回值
+				 				
+			}
+			return -1;
+		}
+		document.write(indexof(emp,10)+"<br />");
+	//-->
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
