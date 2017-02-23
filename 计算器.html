@@ -125,7 +125,7 @@
 		.print label:first-child{
 			line-height:22px;
 			font-size:12px;
-			height:20px;			
+			height:20px;
 		}
 		.contain span{
 			margin:3px 0;
@@ -232,7 +232,7 @@
 		var lab=document.getElementById("lab1"),arr=(lab.innerHTML).split("");
 		var lab2=document.getElementById("lab2");
 		var cpi=conpareBtn(inh),cpb=conpareBtn(arr[arr.length-1]);
-		//var check=false;
+		var check=false;
 		//首要条件: 如果是c按钮,清空所有数据
 		if (idd=="clear"||lab2.innerHTML.charAt(lab2.innerHTML.length-1)=="零"){
 			lab.innerHTML="";
@@ -248,7 +248,8 @@
 				//			  非空依次按优先权判断{ 1: back,2: dot,3: evaluate,4: result} 
 				//数字键权限值最大
 				if(cpi==2){
-					(arr.length!=1||arr[0]!=0)&&(arr[arr.length]=inh);					
+					(arr.length==1&&arr[0]==0)?arr=[inh]:
+					arr.length>1&&(arr[arr.length-1]==0&&conpareBtn(arr[arr.length-2])==0)?(arr[arr.length-1]=inh):(arr[arr.length]=inh);
 				}else{
 					//非空非数字条件下的各种判断
 					if(arr.length!=0){
@@ -279,7 +280,7 @@
 									}
 									else{return 1;}
 								})();
-								tmp==1&&(arr[arr.length]=inh);
+								tmp==1?(arr[arr.length]=inh):(arr[arr.length]="0.");
 								break;
 							//3. 运算符
 							case 0://--------------
@@ -289,17 +290,18 @@
 							//4. 计算结果
 							default://判断结果是否正常,以及解决因2进制计算产生的取舍bug
 								cpb<2&&(arr.length-=1);
-								tmp=eval(arr.join(""));						
+								tmp=eval(arr.join(""));//num!
 								if (tmp=="Infinity"||isNaN(tmp)){
 									lab2.innerHTML="除数不能为零";
 								}else{
 									var ck=tmp.toFixed(10);//ECMa反对使用substr ,substring 不支持负数
 									//1.判断整数和无限小数 两层判断 !!!区分先后 
-									if (Math.floor(ck)==tmp||(ck.slice(ck.length-1)!=0||ck.charAt(ck.length-2)!=0)){
+									//if (Math.floor(ck)==tmp||(ck.slice(ck.length-1)!=0||ck.charAt(ck.length-2)!=0)){
+									if (String(tmp).length<ck.length){
 										lab2.innerHTML=tmp;
 									//2. +00
 									}else{
-										//字符串方法 去除bug产生的尾数0
+										//字符串方法 去除bug产生的尾数0					
 										while (ck.slice(ck.length-1)==0){
 											ck=ck.slice(0,ck.length-1);
 											console.log(ck);
@@ -308,7 +310,7 @@
 									}
 								}
 								//计算结束,lab1++
-								arr[arr.length]=inh;						
+								arr[arr.length]=inh;
 						}//+++++++++++++
 					//非空条件结束
 					}else{
@@ -320,7 +322,7 @@
 			//两个条件:1 有"=",按=键继续输出结果 或 跳过,
 			//		2  其他键一律reset数据
 			else{
-				if (cpi!=-1){		
+				if (cpi!=-1){
 					cpi==2?(lab.innerHTML=inh):
 					cpi==0?(lab.innerHTML=lab2.innerHTML+inh):
 					cpi==-2?lab.innerHTML="":lab.innerHTML="0.";
