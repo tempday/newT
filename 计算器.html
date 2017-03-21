@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>计算器</title>
+	<link rel="icon" href="images/caculate.ico" type="image/x-ico"/>
 	<style type="text/css">
 		*{
 			margin:0;
@@ -29,6 +30,12 @@
 			background:url(images/caculate.png) no-repeat 4px -3px;
 			margin:10px auto 5px 5px;
 			padding-left:28px;
+			width:187px;
+			height:17px;
+		}
+		.header span:first-child{
+			float:left;
+			line-height:19px;
 		}
 		.rt{
 			float:right;
@@ -161,8 +168,7 @@
 		}
 		#equal{
 			height:66px;
-			font-size:16px;
-			
+			font-size:16px;			
 		}
 	</style>
 </head>
@@ -259,28 +265,31 @@
 								arr.length-=1;break;
 							//2.dot小数点按钮
 							case 1://-------------
-								//创建匿名函数 用权值函数 遍历arr ,根据权值筛选出可以加小数点的条件
-								tmp=(function(){
-									var n=[];
-									for(var i=arr.length-1;i>=0;i--){
-										if (n.length==0){
-											n[n.length]=conpareBtn(arr[i]);
-										}else{
-											if (n[0]==2&&n.length==1&&2==conpareBtn(arr[i])){
-												continue;
-											}else{
+								if (cpb!=0){
+									//创建匿名函数 用权值函数 遍历arr ,根据权值筛选出可以加小数点的条件
+									tmp=(function(){
+										var n=[];
+										for(var i=arr.length-1;i>=0;i--){
+											if (n.length==0){
 												n[n.length]=conpareBtn(arr[i]);
+											}else{
+												if (n[0]==2&&n.length==1&&2==conpareBtn(arr[i])){
+													continue;
+												}else{
+													n[n.length]=conpareBtn(arr[i]);
+												}
 											}
 										}
-									}
-									//n 至少有一个元素,且为2
-									if (n.length>1){
-										if ((n[0]==2&&n[1]==1)||n[0]<2){return -1;}
-										else{return 1;}
-									}
-									else{return 1;}
-								})();
-								tmp==1?(arr[arr.length]=inh):(arr[arr.length]="0.");
+										//n 至少有一个元素,且为2
+										if (n.length>1){
+											if ((n[0]==2&&n[1]==1)||n[0]<2){return false;}
+											else{return true;}
+										}
+										else{return true;}
+									})();
+									//console.log(tmp);
+									!tmp||(arr[arr.length]=inh);
+								}else{arr[arr.length]="0.";}
 								break;
 							//3. 运算符
 							case 0://--------------
@@ -301,10 +310,10 @@
 										lab2.innerHTML=tmp;
 									//2. +00
 									}else{
-										//字符串方法 去除bug产生的尾数0					
+										//去0					
 										while (ck.slice(ck.length-1)==0){
 											ck=ck.slice(0,ck.length-1);
-											console.log(ck);
+											//console.log(ck);
 										}
 										conpareBtn(ck.slice(ck.length-1))==1?(lab2.innerHTML=ck.slice(0,ck.length-1)):lab2.innerHTML=ck;									
 									}
@@ -323,13 +332,16 @@
 			//		2  其他键一律reset数据
 			else{
 				if (cpi!=-1){
-					cpi==2?(lab.innerHTML=inh):
-					cpi==0?(lab.innerHTML=lab2.innerHTML+inh):
-					cpi==-2?lab.innerHTML="":lab.innerHTML="0.";
+					switch(cpi){
+						case 2:lab.innerHTML=inh;break;
+						case 0:lab.innerHTML=lab2.innerHTML+inh;break;
+						case -2:lab.innerHTML="";break;
+						default:lab.innerHTML="0.";
+					}
 					lab2.innerHTML="0";
 				}
 			}
-		}			
+		}//!c			
 	}
 	function closeCal(){
 		var id=document.getElementById("hide");
@@ -347,29 +359,6 @@
 		id.style.margin="50px auto";
 		id.style.position="";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//written by lglong519
 </script>
 </html>

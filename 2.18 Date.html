@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Date 对象</title>
+	<meta name="generator" content="EverEdit" />
+	<meta name="author" content="" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+<!--
+	var now=new Date();
+	document.write(now+"<br />");
+	var birth=new Date("1988/12/26");
+	var days=(now.getTime()-birth.getTime())/1000/60/60/24;
+	document.write(Math.floor(days)+"<br />");
+	document.write(days+"<br />");
+	document.write(Number.MAX_VALUE+"<br />");//全大写有常量和固定值
+	//Date API 
+	document.write(now.getFullYear()+"<br />");
+	//计算合同
+	var hiredate=new Date("2012/9/21");
+	var enddate=new Date(hiredate.getTime());
+	enddate.setFullYear(enddate.getFullYear()+3);
+	document.write(enddate.toLocaleDateString());
+//-->
+</script>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
