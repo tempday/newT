@@ -1,0 +1,210 @@
+@charset "utf-8";
+#banner{
+	display:none;
+}
+/***********Detail:V01***************/
+#main{
+	overflow:hidden;
+	border:1px solid red;
+}
+/*************面包屑导航******************/
+div.bread-crumb{
+	height:20px;
+	padding:0 0 4px 6px;
+	margin:10px 2px;
+	overflow:hidden;
+	line-height:20px;
+}
+div.bread-crumb a{
+	padding-right:3px;
+}
+div.bread-crumb a:hover{
+	color:#cd2a2c;
+	text-decoration:none;
+}
+div.bread-crumb b{
+	font-size:18px;
+	font-family:"微软雅黑";
+	line-height:20px;
+}
+div.bread-crumb span{
+	padding:0px 2px;
+}
+/*************V02******************/
+#product_intro{
+	position:relative;
+	height:424px;
+	padding-left:370px;
+}
+/*产品预览*/
+#preview{
+	position:absolute;
+	top:0;
+	left:0;
+	width:352px;
+}
+#preview>p{
+	width:350px;
+	height:350px;
+	border:1px solid #ddd;
+	text-align:center;
+	margin-bottom:5px;
+}
+#preview>div{
+	width:352px;
+	height:54px;
+	padding:0px;
+	position:relative;
+}
+/*方向按钮*/
+#preview a.backward,#preview a.forward,#preview a.backward_disabled,#preview a.forward_disabled{
+	width:17px;
+	height:54px;
+	background:url(Images/iconlist_1.png);
+	background-repeat:no-repeat;
+	display:block;
+	z-index:20;
+	position:absolute;
+	top:0px;
+}
+/*左边 正常显示的箭头*/
+#preview a.backward{
+	left:0px;
+	background-position:0px -139px;
+}
+/*左边 禁用方向箭头*/
+#preview a.backward_disabled{
+	left:0px;
+	background-position:-68px -139px;
+}
+/*左边 鼠标移入上来的箭头*/
+#preview a.backward:hover{
+	background-position:-34px -139px;
+}
+#preview a.forward{
+	right:0px;
+	background-position:-17px -139px;
+}
+/*右边  禁用箭头*/
+#preview a.forward_disabled{
+	right:0px;
+	background-position:-85px -139px;
+}
+#preview a.forward:hover{
+	background-position:-51px -139px;
+}
+/*产品图标列表*/
+#preview #icon_list{
+	width:310px;
+	height:54px;
+	margin:0px auto;
+	position:absolute;
+	top:0px;
+	left:20px;
+}
+#preview #icon_list li{
+	float:left;
+	width:62px;
+	text-align:center;
+}
+#preview #icon_list li img{
+	width:50px;
+	height:50px;
+	padding:1px;
+	border:1px solid #CECFCE;
+}
+#preview #icon_list li img:hover{
+	border:2px solid #e4393c;
+	padding:0;
+}
+/****************Detail-V03**********************/
+#product_intro>h1{
+	width:840px;
+	font-size:16px;
+	line-height:24px;
+	font-family:"Microsoft Yahei";
+	border-bottom:1px dotted #ccc;
+	padding-bottom:10px;
+}
+#product_intro>h1>b{
+	display:block;
+	color:#e4393c;
+}
+/*产品介绍:summary*/
+#summary{
+	width:600px;
+	padding:10px 0px;
+}
+#summary li{
+	padding:6px 0px;
+	height:18px;
+}
+#summary li>p{
+	width:72px;
+	font-family:"microsoft yahei";
+	float:left;
+	text-align:right;
+	height:23px;
+	line-height:23px;
+}
+#summary li div.content{
+	float:left;
+	width:524px;
+	height:23px;
+	line-height:23px;
+}
+#summary a{
+	color:#005AA0;
+}
+#summary_price b{
+	color:#e4393c;
+	font-size:18px;
+	font-weight:bold;
+}
+#summary_grade span{
+	width:75px;
+	height:14px;
+	display:inline-block;
+	background:url(Images/iconlist_1.png) no-repeat -109px -239px;
+	margin-right:6px;
+	margin-top:2px;
+}
+/*配送至*/
+#stock_select{
+	position:relative;
+	float:left;
+	margin-right:6px;
+	height:26px;
+}
+#stock_select h3{
+	position:relative;
+	height:23px;
+	line-height:23px;
+	font-weight:normal;
+	font-size:12px;
+	border:1px solid #CECBCE;
+	padding:0 20px 0 4px;
+}
+
+#stock_select>h3>b{
+	display:block;
+	position:absolute;
+	right:0px;
+	top:0px;
+	width:17px;
+	height:24px;
+	background:url(Images/iconlist_1.png) no-repeat -264px -188px;
+}
+#stock_select>h3:hover{
+	border-bottom:2px solid #fff;
+	cursor:pointer;
+}
+#summary_service span{
+	margin:0px 4px;
+}
+
+
+
+
+
+
