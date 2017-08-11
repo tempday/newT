@@ -30,90 +30,146 @@
 		}
 		table{
 			background: #EBEBEB ;
+			width:445px;
+			overflow-x:hidden;
 		}
+		table tbody,table thead{
+			width:445px;
+		}
+		
 		td{
 			padding:0;
 			margin:0;
 			border:1px solid #FFCC99;
 			width:120px;
+			height:35px;
 			background:#F8EDDA;
 		}
-		tr td:nth-child(3){
+		#table tr td:nth-child(3){
 			width:300px;
-			overflow:hidden;
+			white-space:nowrap;
+			overflow-x:hidden;
 		}
 		tr td:nth-child(1),tr td input{
-			width:25px;
+			width:20px;
+			text-align:center;
 		}
 	</style>
 </head>
 <body>
-	<textarea id="note"></textarea>
+	<textarea id="note" placeholder="Please enter your words." autofocus></textarea>
 	<hr />
 	<input type="button" id="add" onclick="" value="新增"/>
 	<input type="button" id="save" onclick="" value="保存"/>
 	<input type="button" id="read" onclick="" value="读取"/>
-	<input type="button" id="update" onclick="" value="修改"/>
+	<input type="button" id="updata" onclick="" value="修改"/>
 	<input type="button" id="del" onclick="" value="删除"/>
 	<input type="button" id="clear" onclick="" value="清空"/>
-	<div>
-		<form>
-			<table id="table">
-			
-			</table>
-		</form>
+	<div id="show">
+		
+		
 	</div>
+	<input type="hidden" name="hidden"/>
 </body>
 <script type="text/javascript">
-	var add=document.getElementById("add");
 	var note=document.getElementById("note");
+	var add=document.getElementById("add");
+	var save=document.getElementById("save");
+	var read=document.getElementById("read");
+	var show=document.getElementById("show");
+	var input=document.getElementsByTagName("input");
+	var myform;
 	add.onclick=function(){
 		note.value="";
+		input[input.length-1].value="";
 	}
-	var save=document.getElementById("save");
-	var table=document.getElementById("table");
-	var key=new Date().getTime();
+	//保存按钮事件:
+		
 	save.onclick=function(){
 		var data=note.value;
-		sessionStorage.setItem(key,data);
-		var frag=document.createDocumentFragment();
-		var tr=document.createElement("tr");
-		frag.appendChild(tr);
-		var td1=document.createElement("td");
-		td1.innerHTML="<input type='checkbox'/>";
-		tr.appendChild(td1);
-		var td2=document.createElement("td");
-		td2.innerHTML=key;
-		tr.appendChild(td2);
-		var td3=document.createElement("td");
-		td3.innerHTML=data;
-		tr.appendChild(td3);
-		table.appendChild(frag);
-	}
-	var read=document.getElementById("read");
-	var index=0;
-	read.onclick=function(){
-		for(var i=0;i<sessionStorage.length;i++){
-			
+		//难点:怎样判断key是新增还是修改的
+		var key=input[input.length-1].value;
+		if(!key){
+			key=new Date().getTime();
+			input[input.length-1].value=key;
 		}
-		if(sessionStorage.length!=0&&index<sessionStorage.length){
-			key=sessionStorage.key(index);
-			var data=sessionStorage.getItem(key);
+		if(data.trim()){
+			localStorage.setItem(key,data);
+		}
+		if(myform){
+			for(var i=0;i<myform.elements.length;i++){
+				if(myform.elements[i].checked){
+					readData().elements[i].checked=true;
+					return;
+				}
+			}
+			readData();
+		}
+	}
+	
+	read.onclick=readData;
+	function readData(){
+		var myHtml="<form name='myform'><table border='1'><thead><tr><th></th><th>key</th><th>value</th></tr></thead><tbody>";
+		for(var i=0;i<localStorage.length;i++){
+			var key=localStorage.key(i);
+			var data=localStorage.getItem(key);
+			myHtml+="<tr><td><input type='radio' name='mydata'value='"+i+"'/></td><td>"+key+"</td><td>"+data+"</td></tr>";
+		}
+		myHtml+="</tbody></table></form>";
+		show.innerHTML=myHtml;
+		//生成表单后才获取
+		return myform=document.forms["myform"];
+		/*
+		if(localStorage.length!=0&&index<localStorage.length){
+			key=localStorage.key(index);
+			var data=localStorage.getItem(key);
 			note.value=data;
 			index++;
 		}else{
 			index=0;
 		}
-		
+		*/
+	}
+	//读取选中表格的内容,加载到文本框,并给隐藏域value赋值
+	var updata=document.getElementById("updata");
+	updata.onclick=function(){
+		var index=getChecked();
+		if(index!=-1){
+			var key=localStorage.key(index);
+			var data=localStorage.getItem(key);
+			note.value=data;
+			input[input.length-1].value=key;
+		}
+	}
+	function getChecked(){
+		if(myform){
+			for(var i=0;i<myform.elements.length;i++){
+				if(myform.elements[i].checked){
+					return i;
+				}
+			}
+		}else{
+			return -1;
+		}
 	}
 	var clear=document.getElementById("clear");
 	clear.onclick=function(){
-		sessionStorage.clear();
-		table.innerHTML="";
+		localStorage.clear();
+		note.value="";
+		show.innerHTML="";
+		input[input.length-1].value="";
 	}
 	var del=document.getElementById("del");
 	del.onclick=function(){
-		sessionStorage.clear();
+		var index=getChecked();
+		if(index!=-1){
+			var key=localStorage.key(index);
+			var data=localStorage.removeItem(key);
+			readData();
+			if(key==input[input.length-1].value){
+				input[input.length-1].value="";
+			}
+		}
 		
 	}
 </script>

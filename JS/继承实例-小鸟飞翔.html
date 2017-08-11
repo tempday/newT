@@ -29,11 +29,16 @@
 		this.capacity=capacity;
 		
 	}
+	//Plane.__proto__=Flyer.prototype;
+	
 	if(!Flyer.prototype.isPrototypeOf(Plane.prototype)){
 		//修改父对象:方法一(此方法写在构造函数里无效)
 		//Plane.prototype=Flyer.prototype;
 		//修改父对象:方法二
-		Object.setPrototypeOf(Plane.prototype,Flyer.prototype);
+		//原方法
+		//Object.setPrototypeOf(Plane.prototype,Flyer.prototype);
+		//修改后
+		Object.setPrototypeOf(Plane,Flyer.prototype);//此方法plane的子对象,无法继承Flyer的方法,因为Flyer的方法不在Plane的原型链上
 		if(!Plane.hasOwnProperty("fly")){
 			Plane.prototype.fly=function(){
 				console.log(this.fname+" 搭载着"+this.capacity+"名乘客,以"+this.speed+" 时速飞行");

@@ -1,0 +1,242 @@
+练习1:
+1、创建四个元素 ，分别定义边框、宽度、内边距
+   p div p p 
+2、div定义class为s1
+3、通过相邻兄弟选择器 将 div下一个p更改为 红色字体
+   div.s1+p
+   div+p
+4、通过通用兄弟选择器 将 div后所有的p 背景改为 #ccc色
+   div~p
+
+2、属性选择器
+   将元素属性用于选择器中，从而获取指定元素属性或者值得元素
+   语法：
+       [属性] : 具备 指定属性 的所有元素全部匹配出来
+       元素[属性] : 匹配具备 属性的 指定元素
+          p[id] : 匹配具备id属性的p元素
+          div[class] : 
+       元素[属性1][属性2] : 
+         p[id][class] : 匹配出所有即具备id属性，又具备class属性的p元素
+       元素[属性=值] : 
+          input[type="text"] : 匹配type的值为text的input元素
+       元素[属性~=值] :
+          input[class ~= second] : 
+	    <input class="first second" />
+	    <input class="myseconddiv" />
+
+	    ~= : 包含指定的数据（独立）
+	    =  : 只有指定的数据
+       元素[属性^=值] : 匹配指定属性以指定值开始的指定元素
+          p[class^=f] : 匹配class以f开始的p元素
+	  <p class="first"></p>可以匹配
+	  <p class="fast"></p>可以匹配
+	  <p class="second"></p>不能匹配
+       元素[属性*=值] : 属性包含值元素
+          p[class*="valid"];
+	  <p class="myvalid"></p>
+       元素[属性$=值] : 匹配属性以指定值结束的元素
+       元素[属性!=值] : 匹配属性不等于具体值得元素
+
+   eg:
+      input[id] : 获取具备id属性的input元素
+      <input type="text" />
+      <input type="radio" id="rdoGender" />
+
+练习2:
+  过 .....
+=============================================
+1、伪类选择器
+   回顾：什么是伪类选择器
+         更改元素的不同的状态的样式
+	 :hover :link :visited :active
+   1、目标伪类
+      1、什么是目标伪类
+         突出显示活动的HTML锚，用于选取当前活动的目标元素
+      2、语法
+         :target
+	 p:target
+   2、元素状态伪类
+      1、什么是元素状态伪类
+         主要匹配元素的禁用、启用、选中状态
+         多数应用在表单元素上
+      2、常用的状态伪类
+         :disabled  匹配每个被禁用的元素
+	 :enabled 匹配每个已启用的元素
+	 :checked 匹配每个被选中的元素(只用于单选按钮和复选框)
+   3、结构伪类
+      1、什么是结构伪类
+         主要从元素的结构(层级结构)上来进行划分的
+      2、什么时候使用结构伪类
+         找 第一个子元素、最后一个子元素、没有子元素、仅仅只包含一个子元素 优先使用结构伪类
+      3、如何使用结构伪类
+         :first-child  匹配属于其父元素的首个子元素
+	 :last-child 匹配属于其父元素的最后一个子元素
+	 :empty 匹配没有子元素(包含文本)的元素
+	   <p>这是一个段落</p> 非empty
+	   <div></div> empty
+	 :only-child 匹配属于其父元素的唯一子元素
+	   <div>
+	     <span></span>
+	     <span></span>
+	   </div>
+	   <div>
+	     <span></span>
+	   </div>
+	 
+   4、否定伪类
+      匹配非指定元素/选择器的每个元素
+      语法: 
+           :not(selecotr)
+      eg:
+        1、获取 input 但是 type不是text的所有元素
+	   input[type=text]
+	   input:not([type=text])
+	2、获取除第一个div子元素意外的其他div子元素
+	   div:first-child
+	   div:not(div:first-child)
+2、伪元素选择器
+   主要针对元素中的文本内容进行匹配的。
+   1、:first-letter
+      选取指定选择器的首字母
+      eg:
+        p:first-letter{
+	
+	}
+      一般用于 排版、首字符突出等操作
+   2、:first-line
+      选取指定选择器的首行
+   3、::selection
+      匹配用户选取的部分
+	   
+=================================================
+1、内容生成
+   1、什么是内容生成
+      通过css 向元素的前面或后面增加一部分内容
+   2、伪元素
+      :before 匹配到某一元素的最前面
+          p:before
+      :after 匹配到某一元素的最后面
+          p:after
+   3、内容生成
+      content : 配合 :before 或 :after伪元素，插入生成内容
+      content的常用取值:
+      1、字符串:纯文本，插入到指定的位置处
+         p:before{
+		content:"至尊宝:";
+	 }
+      2、url:生成的图像
+         a:before{
+		content:url(Images/i1.jpg);
+	 }
+      3、计数器
+2、计数器
+   1、计数器的作用
+      向已存在的html文本内容增添序号
+   2、如何使用计数器
+      1、定义计数器
+         属性:counter-reset
+	 作用:定义一个计数器，并且设置初始值为0
+	 body{
+		counter-reset:计数器名称 初始值 计数器名称 初始值;
+	 }
+	 body{
+		counter-reset:count 10;
+	 }
+	 
+      2、设置计数器增量
+         可以单独设置某一选择器使用计数器时的增量，默认值是1
+	 属性:counter-increment
+         div{
+		counter-increment:count 10;
+	 }
+      3、使用计数器
+         通过 counter(计数器名称) 来使用计数器
+	 div:before{
+		content:"第"counter(count)"章";
+	 }
+3、多列
+   1、分隔列
+      把一段文本拆分成几列
+      column-count:规定元素被分隔的列数
+   2、列间隔
+      设置列与列之间的距离
+      column-gap:间隔;
+   3、列规则
+      可以在列与列之间设置一条间隔线，列规则可以设置间隔线的样式、颜色、粗细
+      column-rule:大小 样式 颜色;
+
+      column-rule-width:
+      column-rule-style:
+      column-rule-color:
+   4、浏览器兼容
+      1、IE10 以及 Opera 浏览器支持多列属性
+      2、FireFox 需使用前缀 -moz-
+         -moz-column-count:
+	 -moz-column-gap:
+	 -moz-column-rule:
+      3、Chrome 和 Safari
+         -webkit-column-count:
+	 -webkit-column-gap:
+	 -webkit-column-rule:
+4、CSS Hack
+   1、为什么需要CSS Hack
+      浏览器兼容性所引发的问题
+
+   2、浏览器运行模式
+      1、混杂模式
+      2、标准模式(Standard Mode)
+      3、准标准模式(Almost Standard Mode)
+   3、浏览器主要通过 DOCTYPE 进行模式选择
+      触发混杂模式:不声明DOCTYPE
+      触发标准模式:
+
+   4、浏览器兼容问题
+      1、margin和padding
+         ie6中 默认的 maring 偏大
+	 解决方案:body{margin:0px;}
+      2、居中布局
+         ie6以及低版本浏览器:通过父元素的text-align:center;完成居中
+	 高版本浏览器(ie6,ie7+,chrome,firefox,opera,safari):通过当前元素的margin实现即 margin:0 auto;
+      3、元素高度与内容
+         ie6 : 元素的高度至少包括内容
+	 其他:元素高度会超出容器
+	 解决方案:overflow属性
+      4、子元素设置上外边距时
+         ie6:正常显示
+	 其他版本:子元素的上外边距会认为是父元素的上外边距
+	 解决方案:
+	    1、给父元素设置边框
+	    2、设置父元素的 padding-top
+
+   5、HTML头部引用Hack
+      通过HTML条件注释完成
+      <!--[if 条件]>
+      <![endif]-->
+
+      IE6:
+         <!--[if IE 6]>
+	   编写HTML
+	   引入css
+	 <![endif]-->
+      大于IE6的版本:
+      <!--[if gt IE 6]>
+      <![endif]-->
+
+练习：
+  1、创建4个超链接分别链接4个锚点
+     <a href="#img1">img1</a>
+  2、创建4个锚点 ，分别是四幅图像
+     <img id="img1" />
+  3、让4个锚点全部隐藏
+  4、哪个锚点被激活，哪副图像显示出来
+
+
+
+
+
+
+
+
+
+
+
