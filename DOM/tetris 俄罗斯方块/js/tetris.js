@@ -19,6 +19,9 @@ var tetris={
 	interval:300,
 	timer:null,
 	wall:[],
+	score:0,
+	lines:0,
+	level:1,
 	state:1,
 	STATE_RUNNING:1,
 	STATE_GAMEOVER:0,
@@ -47,33 +50,81 @@ var tetris={
 			tetris.drop();
 			tetris.paint();
 		}, this.interval);
-		document.onkeydown=function(){
+		document.onkeydown=function(){//逻辑全部单独写
 			var e=window.event||arguments[0];
 			switch(e.keyCode){
 				case 37:tetris.moveL();break;
 				case 39:tetris.moveR();break;
-				case 40:tetris.drop();tetris.drop();break;
-				case 83:tetris.state=1;tetris.init();break;
-				case 80:tetris.state=2;clearInterval(tetris.timer);break;
+				case 40:tetris.drop();tetris.drop();tetris.drop();break;
+				case 83:tetris.start();break;//S
+				case 80:tetris.pause();break;//P
+				case 38:tetris.rotateR();break;
+				case 90:tetris.rotateL();break;
+				case 67:tetris.mycontinue();break;
+				case 32:tetris.mycontinue();break;
+				case 81:tetris.gameOver();break;
+			} 
+		}
+	},
+	pause:function(){
+		if(this.state==this.STATE_RUNNING){
+			this.state=this.STATE_PAUSE;
+		}
+	},
+	gameOver:function(){
+		this.state=this.STATE_GAMEOVER;
+		//this.paintState();
+		clearInterval(this.timer);
+		this.timer=null;
+		this.paint();
+	},
+	mycontinue:function(){
+		if(this.state==this.STATE_PAUSE){
+			this.state=this.STATE_RUNNING;
+		}
+	},
+	start:function(){
+		if(this.state==this.STATE_GAMEOVER){
+			this.state=this.STATE_RUNNING;
+			tetris.init();
+		}
+	},
+	rotateR:function(){
+		if(this.state==this.STATE_RUNNING){
+			this.currShape.rotateR();
+			if(this.outOfBounds()||this.hit()){
+				this.currShape.rotateL();
+			}
+		}
+	},
+	rotateL:function(){//为了检测碰撞作的回退
+		if(this.state==this.STATE_RUNNING){
+			this.currShape.rotateL();
+			if(this.outOfBounds()||this.hit()){
+				this.currShape.rotateR();
 			}
 		}
 	},
 	moveR:function(){
-		this.currShape.moveR();
-		if(this.outOfBounds()||this.hit()){
-			this.currShape.moveL();
+		if(this.state==this.STATE_RUNNING){
+			this.currShape.moveR();
+			if(this.outOfBounds()||this.hit()){
+				this.currShape.moveL();
+			}
 		}
 	},
 	moveL:function(){
-		this.currShape.moveL();
-		if(this.outOfBounds()||this.hit()){
-			this.currShape.moveR();
+		if(this.state==this.STATE_RUNNING){
+			this.currShape.moveL();
+			if(this.outOfBounds()||this.hit()){
+				this.currShape.moveR();
+			}
 		}
 	},
 	outOfBounds:function(){
 		var cell=this.currShape.cells;
 		for(var i=0;i<cell.length;i++){
-			if(cell[i].col<0||cell[i].col>this.CN-1){
+			if(cell[i].row<0||cell[i].row>19||cell[i].col<0||cell[i].col>this.CN-1){
 				return true;
 			}
 		}
@@ -87,27 +138,29 @@ var tetris={
 		}
 	},
 	drop:function(){
-		if(this.canDrop()){
-			this.currShape.drop();
-		}else{
-			this.landToWall();
-			//下落完成后检测是否满行
-			var ln=this.deleteLines();
-			var score=document.querySelectorAll("span");
-			score[0].innerHTML=ln*10+parseInt(score[0].innerHTML);
-			score[1].innerHTML=ln+parseInt(score[1].innerHTML);
-			score[2].innerHTML=parseInt(score[2].innerHTML/10)+1;
-			//this.currShape=this.randomShape();
-			if(!this.isGameOver()){
-				this.currShape=this.nextShape;
-				this.nextShape=this.randomShape();
+		if(this.state==this.STATE_RUNNING){//判断当前状态是不是1
+			if(this.canDrop()){
+				this.currShape.drop();
 			}else{
-				//console.log("asdf");
-				clearInterval(this.timer);
-				this.timer=null;
-				this.state=this.STATE_GAMEOVER;
-				//document.querySelector(".over").style.display="block";
-				this.paint();
+				this.landToWall();
+				//下落完成后检测是否满行
+				var ln=this.deleteLines();
+				var score=document.querySelectorAll("span");
+				score[0].innerHTML=ln*10+parseInt(score[0].innerHTML);
+				score[1].innerHTML=ln+parseInt(score[1].innerHTML);
+				score[2].innerHTML=parseInt(score[2].innerHTML/10)+1;
+				//this.currShape=this.randomShape();
+				if(!this.isGameOver()){
+					this.currShape=this.nextShape;
+					this.nextShape=this.randomShape();
+				}else{
+					//console.log("asdf");
+					clearInterval(this.timer);
+					this.timer=null;
+					this.state=this.STATE_GAMEOVER;
+					//document.querySelector(".over").style.display="block";
+					this.paint();
+				}
 			}
 		}
 	},
@@ -217,7 +270,8 @@ var tetris={
 		}
 	},
 	randomShape:function(){
-		return new [O,I,S,Z,T,L,J][parseInt(Math.random()*7)]();
+		//return new [O,I,S,Z,T,L,J][parseInt(Math.random()*7)]();
+		return new [I,S,T][parseInt(Math.random()*3)]();
 	},
 	paintShape:function(){//绘制当前图形
 		var cell=this.currShape.cells;
